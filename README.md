@@ -12,7 +12,7 @@
 ### Association
 - has_many : groups, through: :members
 - has_many: messages
-- belongs_to: member
+- has_many: members
 ******
 
 ## groupsテーブル
@@ -20,12 +20,12 @@
 |Column|Type|Options|
 |------|----|-------|
 |name|text|null: false|
-|user_name|text|null: false|
+|user_id|text|null: false|
 
 ### Association
-- has_many : users, through: :members
+- has_many: users, through: :members
 - has_many: messages
-- belongs_to: member
+- has_many: members
 ********
 
 ## membersテーブル
