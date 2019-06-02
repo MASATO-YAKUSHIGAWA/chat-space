@@ -1,4 +1,4 @@
-.Header
+.flash-box
   グループを作成しました
 
 .Wrapper
@@ -10,20 +10,45 @@
       .Wrapper__Main__Main-header__left-box__current-group
         group1
       .Wrapper__Main__Main-header__left-box__member-list
-        masato
-  .Wrapper__Main__Message
-    message
+        member: masato
+  .Wrapper__Main__Messages
+    .Wrapper__Main__Messages__message
+      .Wrapper__Main__Messages__message__upper-info
+        .Wrapper__Main__Messages__message__upper-info__talker
+          masato
+        .Wrapper__Main__Messages__message__upper-info__day
+          2019/06/01
+      .Wrapper__Main__Messages__message__text
+        message
   .Wrapper__Main__Form
+    .Wrapper__Main__Form__new-message
+      .Wrapper__Main__Form__new-message__input-box
+        .Wrapper__Main__Form__new-message__input-box__type-text
+          type a message
+        .Wrapper__Main__Form__new-message__input-box__image
+          %label{for: "id"}
+            = fa_icon "image"
+            %input#id{type: "file", style: "display:none"}
+          
+          
+      .Wrapper__Main__Form__new-message__send-btn
+        send
+
 .Wrapper__Side
   .Wrapper__Side__Side-header
     .Wrapper__Side__Side-header__box
       .Wrapper__Side__Side-header__box__user-name
         masato
       .Wrapper__Side__Side-header__box__user-menu
-        = link_to "https://chat-space-sample.herokuapp.com/groups/new", class: "Side-header__box__user-menu__new" do
-          = fa_icon "cog"
-        = link_to "https://chat-space-sample.herokuapp.com/users/516/edit", class: "Side-header__box__user-menu__edit" do
-          = fa_icon "edit"
-  .Wrapper__Side__Group
-    group1
+        = link_to "", class: "Side-header__box__user-menu__edit" do
+          = fa_icon "edit", class: "Wrapper__Side__Side-header__box__user-menu--edit"
+        = link_to "", class: "Side-header__box__user-menu__new" do
+          = fa_icon "cog", class: "Wrapper__Side__Side-header__box__user-menu--cog"
+        
+  .Wrapper__Side__Groups
+    .Wrapper__Side__Groups__group
+      .Wrapper__Side__Groups__group__name
+        group1
+      .Wrapper__Side__Group__group__latest-message
+        message
 
