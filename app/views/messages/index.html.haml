@@ -1,54 +1,32 @@
-.flash-box
-  グループを作成しました
+.wrapper
 
-.Wrapper
-.Wrapper__Main
-  .Wrapper__Main__Main-header
-    .Wrapper__Main__Main-header__edit-btn
-      edit
-    .Wrapper__Main__Main-header__left-box
-      .Wrapper__Main__Main-header__left-box__current-group
-        group1
-      .Wrapper__Main__Main-header__left-box__member-list
-        member: masato
-  .Wrapper__Main__Messages
-    .Wrapper__Main__Messages__message
-      .Wrapper__Main__Messages__message__upper-info
-        .Wrapper__Main__Messages__message__upper-info__talker
-          masato
-        .Wrapper__Main__Messages__message__upper-info__day
-          2019/06/01
-      .Wrapper__Main__Messages__message__text
-        message
-  .Wrapper__Main__Form
-    .Wrapper__Main__Form__new-message
-      .Wrapper__Main__Form__new-message__input-box
-        .Wrapper__Main__Form__new-message__input-box__type-text
-          type a message
-        .Wrapper__Main__Form__new-message__input-box__image
-          %label{for: "id"}
-            = fa_icon "image"
-            %input#id{type: "file", style: "display:none"}
+  = render "shared/side_bar"
+
+  .chat
+    .header
+      .left-header
+        .left-header__title
+          グループ名
+        %ul.left-header__members
+          Member：
+          %li.member
+            メンバー名
+          %li.member
+            メンバー名
+          %li.member
+            メンバー名
+      .right-header
+        .right-header__button
+        = link_to "EDIT", edit_group_path(current_user), method: :get
           
-          
-      .Wrapper__Main__Form__new-message__send-btn
-        send
-
-.Wrapper__Side
-  .Wrapper__Side__Side-header
-    .Wrapper__Side__Side-header__box
-      .Wrapper__Side__Side-header__box__user-name
-        masato
-      .Wrapper__Side__Side-header__box__user-menu
-        = link_to "", class: "Side-header__box__user-menu__edit" do
-          = fa_icon "edit", class: "Wrapper__Side__Side-header__box__user-menu--edit"
-        = link_to "", class: "Side-header__box__user-menu__new" do
-          = fa_icon "cog", class: "Wrapper__Side__Side-header__box__user-menu--cog"
-        
-  .Wrapper__Side__Groups
-    .Wrapper__Side__Groups__group
-      .Wrapper__Side__Groups__group__name
-        group1
-      .Wrapper__Side__Group__group__latest-message
-        message
-
+    .messages
+      = render partial: 'messages/message', collection: @messages
+      
+    .form
+      = form_for [@group, @message] do |f|
+        = f.text_field :content, class: 'form__message', placeholder: 'type a message'
+        .form__mask
+          = f.label :image, class: 'form__mask__image' do
+            = fa_icon 'picture-o', class: 'icon'
+            = f.file_field :image, class: 'hidden'
+        = f.submit 'Send', class: 'form__submit'
