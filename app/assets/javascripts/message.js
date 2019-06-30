@@ -1,8 +1,9 @@
-$(function(){
+$(document).on("turbolinks:load", (function(){
   function buildHTML (message){
     var content = message.content ? `${ message.content }` : "";
     var img = message.image ? `<img src= ${ message.image }>` : "";
-    var html = <div class='message'>
+    console.log(img)
+    var html =  `<div class='message'>
                 <div class='upper-message'>
                 <div class='upper-message__user-name'>
                 ${message.user_name}
@@ -13,13 +14,11 @@ $(function(){
                 </div>
                 <div class='lower-message'>
                 <p class='lower-message__content'>
-                <div>
-                  ${content}
-                </div>
-                ${img}
+                ${content}
                 </p>
+                ${img}
                 </div>
-                </div>
+                </div>`
     return html;            
   }
 
@@ -29,26 +28,54 @@ $(function(){
     // console.log(this)
     var formData = new FormData(this);
     var url = (window.location.href);
+    console.log(url);
+
     $.ajax({
       url: url,
       type: "POST",
       data: formData,
       dataType: "json",
       processData: false,
-      contentType: false
+      contentType: false,
+
+      //ajax通信エラー
+      error : function(XMLHttpRequest, textStatus, errorThrown) {
+      console.log("ajax通信に失敗しました");
+      console.log("XMLHttpRequest : " + XMLHttpRequest.status);
+      console.log("textStatus     : " + textStatus);
+      console.log("errorThrown    : " + errorThrown.message);
+      },
+      //ajax通信成功
+      success : function(response) {
+      console.log("ajax通信に成功しました");
+      console.log(response);
+      } 
     })
 
     .done(function(data){
-      var html = buldHTML(data);
-      $('.message').append(html);
-      $('#message_content').val('')
+      console.log(data);
+      var html = buildHTML(data);
+      $('.messages').append(html);
+      $('#message_content').val('');
   
+      function scrollBottom(){
+        var target = $('.message').last();
+        var position = target.offset().top + $('.messages').scrollTop();
+        $('.messages').animate({
+          scrollTop: position
+        }, 300, 'swing');
+      }
     })
+
     .fail(function(data){
       alert('エラーが発生したためメッセージは送信できませんでした。');
     })
+
     .always(function(data){
-      $('.submit-btn').prop('disabled', false);
+      $('.form__submit').prop('disabled', false);
+    })
+
   })
 })
-})
+
+)
