@@ -37,19 +37,6 @@ $(document).on("turbolinks:load", (function(){
       dataType: "json",
       processData: false,
       contentType: false,
-
-      //ajax通信エラー
-      error : function(XMLHttpRequest, textStatus, errorThrown) {
-      console.log("ajax通信に失敗しました");
-      console.log("XMLHttpRequest : " + XMLHttpRequest.status);
-      console.log("textStatus     : " + textStatus);
-      console.log("errorThrown    : " + errorThrown.message);
-      },
-      //ajax通信成功
-      success : function(response) {
-      console.log("ajax通信に成功しました");
-      console.log(response);
-      } 
     })
 
     .done(function(data){
