@@ -62,6 +62,7 @@
     }
 
     .chat-group-form__label {
+      float: left;
       display: block;
       line-height: 50px;
       font-weight: bold;
@@ -69,7 +70,7 @@
     }
 
     .chat-group-form__input {
-      float: left;
+      float: right;
       width: 100%;
       line-height: 30px;
       padding: 10px 15px;
@@ -101,7 +102,8 @@
         color: #38aef0;
       }
 
-      &.chat-group-user__btn--remove {
+      &.user-search-remove.chat-group-user__btn.chat-group-user__btn--remove.js-remove-btn {
+        float: right;
         color: #f05050;
       }
     }

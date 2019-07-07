@@ -20,14 +20,23 @@ class GroupsController < ApplicationController
   end
 
   def edit
+    @users = User.all
     
   end
 
   def update
     if @group.update(group_params)
-      redirect_to root_path, notice: "編集します"
+      redirect_to group_messages_path(@group), notice: 'グループを編集しました'
     else
       render :edit
+    end
+  end
+
+  def search
+    @users = User.where('name LIKE(?)', "%#{params[:keyword]}%")
+    respond_to do |format|
+      format.html
+      format.json
     end
   end
 
