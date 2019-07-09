@@ -2,7 +2,6 @@ $(document).on("turbolinks:load", (function(){
   function buildHTML (message){
     var content = message.content ? `${ message.content }` : "";
     var img = message.image.url ? `<img src= ${ message.image.url }>` : "";
-    //console.log(img)
     var html =  `<div class='message' data-message-id = "${message.id}">
                 <div class='upper-message'>
                 <div class='upper-message__user-name'>
@@ -25,10 +24,8 @@ $(document).on("turbolinks:load", (function(){
 
   $('#new_message').on('submit', function(e){
     e.preventDefault();
-    // console.log(this)
     var formData = new FormData(this);
     var url = (window.location.href);
-    //console.log(url);
 
     $.ajax({
       url: url,
@@ -40,7 +37,6 @@ $(document).on("turbolinks:load", (function(){
     })
 
     .done(function(data){
-      console.log(data);
       var html = buildHTML(data);
       $('.messages').append(html);
       $('#message_content').val('');
@@ -62,8 +58,6 @@ $(document).on("turbolinks:load", (function(){
     //カスタムデータ属性を利用し、ブラウザに表示されている最新メッセージのidを取得
     last_message_id = $('.message:last').data('message-id');
     var group_id = $('.message').data('group-id');
-    //console.log(last_message_id)
-    //console.log(group_id)
 
     $.ajax({
       url: `/groups/${group_id}/api/messages`,//ルーティングで設定した通りのURLを指定
@@ -72,7 +66,6 @@ $(document).on("turbolinks:load", (function(){
       data: {id: last_message_id}//dataオプションでリクエストに値を含める
     })
     .done(function(messages){
-      //console.log("success")
       //追加するHTMLの入れ物を作る
       var insertHTML = ""
       //配列messagesの中身一つ一つを取り出し、HTMLに変換したものを入れ物に足し合わせる
@@ -88,7 +81,7 @@ $(document).on("turbolinks:load", (function(){
     })
     
     .fail(function(){
-      console.log("error");
+      alert('失敗しました');
     })
   }
   setInterval(reloadMessages, 5000);
