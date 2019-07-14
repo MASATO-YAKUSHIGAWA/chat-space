@@ -59,8 +59,11 @@ $(document).on("turbolinks:load", (function(){
     last_message_id = $('.message:last').data('message-id');
     var group_id = $('.message').data('group-id');
 
+    if (location.href.match(/\/groups\/\d+\/messages/)) {
+
     $.ajax({
-      url: `/groups/${group_id}/api/messages`,//ルーティングで設定した通りのURLを指定
+      url: `/groups/${group_id}/api/messages`,
+      //ルーティングで設定した通りのURLを指定
       type: 'GET',//ルーティングで設定した通りhttpメソッドをgetに指定
       dataType: 'json',
       data: {id: last_message_id}//dataオプションでリクエストに値を含める
@@ -80,9 +83,10 @@ $(document).on("turbolinks:load", (function(){
 
     })
     
-    // .fail(function(){
-    //   alert('失敗しました');
-    // })
+    .fail(function(){
+      alert('失敗しました');
+    })
+    }
   }
   setInterval(reloadMessages, 5000);
 })
