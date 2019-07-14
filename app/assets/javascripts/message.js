@@ -80,9 +80,9 @@ $(document).on("turbolinks:load", (function(){
 
     })
     
-    .fail(function(){
-      alert('失敗しました');
-    })
+    // .fail(function(){
+    //   alert('失敗しました');
+    // })
   }
   setInterval(reloadMessages, 5000);
 })
