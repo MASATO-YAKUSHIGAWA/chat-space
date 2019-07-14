@@ -58,11 +58,12 @@ $(document).on("turbolinks:load", (function(){
     //カスタムデータ属性を利用し、ブラウザに表示されている最新メッセージのidを取得
     last_message_id = $('.message:last').data('message-id');
     var group_id = $('.message').data('group-id');
+    var url = window.location.href;
 
     if (location.href.match(/\/groups\/\d+\/messages/)) {
 
     $.ajax({
-      url: `/groups/${group_id}/api/messages`,
+      url: url,
       //ルーティングで設定した通りのURLを指定
       type: 'GET',//ルーティングで設定した通りhttpメソッドをgetに指定
       dataType: 'json',
