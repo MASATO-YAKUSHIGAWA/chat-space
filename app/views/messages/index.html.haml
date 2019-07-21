@@ -14,7 +14,7 @@
               = user.name
       .right-header
         .right-header__button
-        = link_to "EDIT", edit_group_path(current_user), method: :get
+        = link_to "EDIT", edit_group_path(@group.id), method: :get
           
     .messages
       = render partial: 'messages/message', collection: @messages
