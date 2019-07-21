@@ -53,11 +53,11 @@ function appendMembers(name, user_id) {
         });
       }
       else {
-        appendNoUsers("一致する映画はありません");
+        appendNoUsers("一致するユーザーはありません");
       }
     })
     .fail(function() {
-      alert('映画検索に失敗しました');
+      alert('検索に失敗しました');
     })
   })
 

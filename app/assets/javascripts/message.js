@@ -1,4 +1,4 @@
-$(document).on("turbolinks:load", (function(){
+$(document).on("turbolinks:load", function(){
   function buildHTML (message){
     var content = message.content ? `${ message.content }` : "";
     var img = message.image.url ? `<img src= ${ message.image.url }>` : "";
@@ -40,6 +40,7 @@ $(document).on("turbolinks:load", (function(){
       var html = buildHTML(data);
       $('.messages').append(html);
       $('#message_content').val('');
+      $('#message_image').val('');
   
       $('.messages').animate({scrollTop: $('.messages')[0].scrollHeight});
 
@@ -73,6 +74,7 @@ $(document).on("turbolinks:load", (function(){
       
       //追加するHTMLの入れ物を作る
       var insertHTML = ""
+      if (messages.length !== 0) {
       //配列messagesの中身一つ一つを取り出し、HTMLに変換したものを入れ物に足し合わせる
       messages.forEach(function(message){
         //メッセージが入ったHTMLを取得
@@ -82,14 +84,13 @@ $(document).on("turbolinks:load", (function(){
         $('.messages').append(insertHTML);
       })
     $('.messages').animate({scrollTop: $('.messages')[0].scrollHeight},100);
-
+    }
     })
     
     .fail(function(){
       alert('失敗しました');
     })
-  }
-  }
+  };
+  };
   setInterval(reloadMessages, 5000);
 })
-)
